@@ -1,0 +1,20 @@
+# DJANGO passenger_wsgi.py template
+
+import sys, os
+
+## Project Path
+path = '/home/exheradev/vranimeted-session/vranimeted' ### Path to source files, relative to cPanel directory.
+if path not in sys.path:
+    sys.path.append(path)
+
+## Optional debug statement.
+# print("PATH IS:" + str(sys.path))
+
+## Grab Django's WSGI server module.
+from django.core.wsgi import get_wsgi_application
+
+## Set the enviromental variables to configure WSGI.
+os.environ.setdefault('DJANGO_SETTINGS_MODULE', 'vranimeted.settings')
+
+## Declate WSGI as the application to run.
+application = get_wsgi_application()
