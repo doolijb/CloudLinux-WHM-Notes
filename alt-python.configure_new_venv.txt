@@ -1,0 +1,5 @@
+# CONFIGURE NEW CLOUDLINUX/CLI ALT-PYTHON VENV FOR APP DEPLOYMENT
+
+## PIP COMMANDS
+pip install pip -U ### Update PIP
+pip install setuptools -U ### Update setup tools (required for patreon==0.5.0, etc)
