@@ -1,0 +1,67 @@
+# GET DJANGO READY FOR DEPLOYMENT
+
+## Build paths inside the project like this: BASE_DIR / 'subdir'.
+BASE_DIR = os.path.dirname(os.path.dirname(os.path.abspath(__file__)))
+
+#---------------------------------------------------------------------
+
+MIDDLEWARE = [
+  ...
+  'whitenoise.middleware.WhiteNoiseMiddleware', # Static file handler
+  ...
+]
+
+#---------------------------------------------------------------------
+
+## Templates Directory
+TEMPLATE_DIR = os.path.join(BASE_DIR,"templates")
+
+TEMPLATES = [
+    {
+        'BACKEND': 'django.template.backends.django.DjangoTemplates',
+        'DIRS': [os.path.normpath(os.path.join(BASE_DIR, 'templates')),],
+        'APP_DIRS': True,
+        'OPTIONS': {
+            'context_processors': [
+                'django.template.context_processors.debug',
+                'django.template.context_processors.request',
+                'django.contrib.auth.context_processors.auth',
+                'django.contrib.messages.context_processors.messages',
+            ],
+        },
+    },
+]
+
+#---------------------------------------------------------------------
+
+import pymysql ### Useful alternative to mysqlclient
+
+DATABASES = {
+    'default': {
+        'ENGINE': 'django.db.backends.mysql',
+        'NAME': 'DB_NAME',
+        'USER': 'DB_USER',
+        'PASSWORD': 'DB_USER_PASS',
+        'HOST': '',
+        'PORT': '',
+    }
+}
+
+pymysql.version_info = (1, 4, 2, "final", 0) ## Trick mysql version
+pymysql.install_as_MySQLdb()
+
+#---------------------------------------------------------------------
+
+## Static files (CSS, JavaScript, Images)
+### https://docs.djangoproject.com/en/1.9/howto/static-files/
+STATIC_ROOT = os.path.join(BASE_DIR, 'staticfiles')
+STATIC_URL = '/static/'
+
+## Extra places for collectstatic to find static files.
+STATICFILES_DIRS = (
+    os.path.join(BASE_DIR, 'static'),
+)
+
+## Simplified static file serving.
+### https://warehouse.python.org/project/whitenoise/
+STATICFILES_STORAGE = 'whitenoise.storage.CompressedManifestStaticFilesStorage'
