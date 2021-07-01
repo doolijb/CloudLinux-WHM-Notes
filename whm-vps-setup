@@ -1,0 +1,3 @@
+## Generate hostname ssl
+# https://support.cpanel.net/hc/en-us/articles/360049231953-Install-the-free-SSL-Certificate-on-the-server-s-hostname
+/usr/local/cpanel/bin/checkallsslcerts
