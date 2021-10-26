@@ -1,0 +1,15 @@
+# Convert charsets from MYSQL to MARIADB compatible
+
+```
+Terminal$
+find . -type f -name "*" -print0 | xargs -0 sed -i "s/DEFAULT CHARACTER SET latin1/DEFAULT CHARACTER SET utf8mb4/g"
+find . -type f -name "*" -print0 | xargs -0 sed -i "s/DEFAULT CHARSET=latin1/DEFAULT CHARSET=utf8mb4 COLLATE=utf8mb4_unicode_ci /"
+find . -type f -name "*" -print0 | xargs -0 sed -i "s/SET character_set_client = utf8/SET character_set_client = utf8mb4/"
+find . -type f -name "*" -print0 | xargs -0 sed -i 's/utf8mb4_0900_ai_ci/utf8_general_ci/g'
+```
+
+## Finds all files
+`find . -type f -name "*" -print0 | xargs -0 sed -i`
+
+## Changes all occurances
+sed -i 's/utf8mb4_0900_ai_ci/utf8_general_ci/g'
